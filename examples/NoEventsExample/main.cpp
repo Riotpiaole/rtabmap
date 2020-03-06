@@ -33,24 +33,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <rtabmap/core/Odometry.h>
 #include <QApplication>
 #include <stdio.h>
+#include <rtabmap/core/Parameters.h>
 
 using namespace rtabmap;
 
 void showUsage()
 {
 	printf("\nUsage:\n"
-			"rtabmap-noEventsExample camera_rate odom_update map_update calibration_dir calibration_name path_left_images path_right_images\n"
-			"Description:\n"
-			"    camera_rate          Rate (Hz) of the camera.\n"
-			"    odom_update          Do odometry update each X camera frames.\n"
-			"    map_update           Do map update each X odometry frames.\n"
-			"\n"
-			"Example:\n"
-			"     (with images from \"https://github.com/introlab/rtabmap/wiki/Stereo-mapping#process-a-directory-of-stereo-images\") \n"
-			"     $ rtabmap-noEventsExample 20 2 10 stereo_20Hz stereo_20Hz stereo_20Hz/left stereo_20Hz/right\n"
-			"       Camera rate = 20 Hz\n"
-			"       Odometry update rate = 10 Hz\n"
-			"       Map update rate = 1 Hz\n");
+		   "rtabmap-noEventsExample camera_rate odom_update map_update calibration_dir calibration_name path_left_images path_right_images\n"
+		   "Description:\n"
+		   "    camera_rate          Rate (Hz) of the camera.\n"
+		   "    odom_update          Do odometry update each X camera frames.\n"
+		   "    map_update           Do map update each X odometry frames.\n"
+		   "\n"
+		   "Example:\n"
+		   "     (with images from \"https://github.com/introlab/rtabmap/wiki/Stereo-mapping#process-a-directory-of-stereo-images\") \n"
+		   "     $ rtabmap-noEventsExample 20 2 10 stereo_20Hz stereo_20Hz stereo_20Hz/left stereo_20Hz/right\n"
+		   "       Camera rate = 20 Hz\n"
+		   "       Odometry update rate = 10 Hz\n"
+		   "       Map update rate = 1 Hz\n");
 	exit(1);
 }
 
@@ -101,10 +102,13 @@ int main(int argc, char * argv[])
 			(float)cameraRate,
 			opticalRotation);
 
+	ParametersMap parameters;
+	parameters.insert(ParametersPair(Parameters::kRGBDCreateOccupancyGrid(), "true"));
+	Rtabmap rtabmap;
+
 	if(camera.init(calibrationDir, calibrationName))
 	{
 		Odometry * odom = Odometry::create();
-		Rtabmap rtabmap;
 		rtabmap.init();
 
 		QApplication app(argc, argv);
@@ -155,11 +159,13 @@ int main(int argc, char * argv[])
 			printf("Processed all frames\n");
 			app.exec();
 		}
+
 	}
 	else
 	{
 		UERROR("Camera init failed!");
 	}
+	rtabmap.close(true, calibrationDir + "grid_db.db");
 
 	return 0;
 }

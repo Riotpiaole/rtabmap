@@ -526,6 +526,12 @@ bool CameraRealSense2::init(const std::string & calibrationFolder, const std::st
 			*dev_[0] = dev;
 			found=true;
 		}
+
+		auto dbg = dev.as<rs2::debug_protocol>();
+		std::vector<uint8_t> cmd = {0x14, 0, 0xab, 0xcd, 0x2a, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+		auto res = dbg.send_and_receive_raw_data(cmd);
+		UDEBUG("Camera Realsense temperature health check %i", (int) res[4]);
 	}
 
 	if (!found)

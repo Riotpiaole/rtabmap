@@ -48,27 +48,28 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 void showUsage()
 {
 	printf("\nUsage:\n"
-			"rtabmap-rgbd_camera [options] driver\n"
-			"  driver       Driver number to use: 0=OpenNI-PCL (Kinect)\n"
-			"                                     1=OpenNI2    (Kinect and Xtion PRO Live)\n"
-			"                                     2=Freenect   (Kinect)\n"
-			"                                     3=OpenNI-CV  (Kinect)\n"
-			"                                     4=OpenNI-CV-ASUS (Xtion PRO Live)\n"
-			"                                     5=Freenect2  (Kinect v2)\n"
-			"                                     6=DC1394     (Bumblebee2)\n"
-			"                                     7=FlyCapture2 (Bumblebee2)\n"
-			"                                     8=ZED stereo\n"
-			"                                     9=RealSense\n"
-			"                                     10=Kinect for Windows 2 SDK\n"
-			"                                     11=RealSense2\n"
-			"                                     12=Kinect for Azure SDK\n"
-			"  Options:\n"
-			"      -rate #.#                      Input rate Hz (default 0=inf)\n"
-			"      -device #                      Device ID (number or string)\n"
-			"      -save_stereo \"path\"            Save stereo images in a folder or a video file (side by side *.avi).\n"
-			"      -fourcc \"XXXX\"               Four characters FourCC code (default is \"MJPG\") used\n"
-			"                                       when saving stereo images to a video file.\n"
-			"                                       See http://www.fourcc.org/codecs.php for more codes.\n");
+		   "rtabmap-rgbd_camera [options] driver\n"
+		   "  driver       Driver number to use: 0=OpenNI-PCL (Kinect)\n"
+		   "                                     1=OpenNI2    (Kinect and Xtion PRO Live)\n"
+		   "                                     2=Freenect   (Kinect)\n"
+		   "                                     3=OpenNI-CV  (Kinect)\n"
+		   "                                     4=OpenNI-CV-ASUS (Xtion PRO Live)\n"
+		   "                                     5=Freenect2  (Kinect v2)\n"
+		   "                                     6=DC1394     (Bumblebee2)\n"
+		   "                                     7=FlyCapture2 (Bumblebee2)\n"
+		   "                                     8=ZED stereo\n"
+		   "                                     9=RealSense\n"
+		   "                                     10=Kinect for Windows 2 SDK\n"
+		   "                                     11=RealSense2\n"
+		   "                                     12=Kinect for Azure SDK\n"
+		   "                                     13=Kinect for usbcamera\n"
+		   "  Options:\n"
+		   "      -rate #.#                      Input rate Hz (default 0=inf)\n"
+		   "      -device #                      Device ID (number or string)\n"
+		   "      -save_stereo \"path\"            Save stereo images in a folder or a video file (side by side *.avi).\n"
+		   "      -fourcc \"XXXX\"               Four characters FourCC code (default is \"MJPG\") used\n"
+		   "                                       when saving stereo images to a video file.\n"
+		   "                                       See http://www.fourcc.org/codecs.php for more codes.\n");
 	exit(1);
 }
 
@@ -173,9 +174,9 @@ int main(int argc, char * argv[])
 
 			// last
 			driver = atoi(argv[i]);
-			if(driver < 0 || driver > 12)
+			if(driver < 0 || driver > 13)
 			{
-				UERROR("driver should be between 0 and 12.");
+				UERROR("driver should be between 0 and 13.");
 				showUsage();
 			}
 		}

@@ -2,21 +2,21 @@
 SET(SRC_FILES
     Rtabmap.cpp
     RtabmapThread.cpp
-    
+
     Statistics.cpp
-    
+
     Memory.cpp
-    
+
     DBDriver.cpp
     DBDriverSqlite3.cpp
     DBReader.cpp
-    
+
     Recovery.cpp
-    
+
     Camera.cpp
     CameraThread.cpp
     CameraModel.cpp
-    
+
     camera/CameraFreenect.cpp
     camera/CameraFreenect2.cpp
     camera/CameraImages.cpp
@@ -35,7 +35,7 @@ SET(SRC_FILES
     camera/CameraStereoZed.cpp
     camera/CameraStereoTara.cpp
     camera/CameraVideo.cpp
-    
+
     EpipolarGeometry.cpp
     VisualWord.cpp
     VWDictionary.cpp
@@ -45,9 +45,9 @@ SET(SRC_FILES
     Features2d.cpp
     Transform.cpp
     GeodeticCoords.cpp
-    
+
     util2d.cpp
-    
+
     util3d.cpp
     util3d_filtering.cpp
     util3d_mapping.cpp
@@ -57,24 +57,24 @@ SET(SRC_FILES
     util3d_features.cpp
     util3d_correspondences.cpp
     util3d_motion_estimation.cpp
-    
+
     SensorData.cpp
     Graph.cpp
     Compression.cpp
     Link.cpp
     LaserScan.cpp
-    
+
     Optimizer.cpp
     optimizer/OptimizerTORO.cpp
     optimizer/OptimizerG2O.cpp
     optimizer/OptimizerGTSAM.cpp
     optimizer/OptimizerCVSBA.cpp
     optimizer/OptimizerCeres.cpp
-    
+
     Registration.cpp
     RegistrationIcp.cpp
     RegistrationVis.cpp
-    
+
     Odometry.cpp
     OdometryThread.cpp
     odometry/OdometryF2M.cpp
@@ -88,33 +88,33 @@ SET(SRC_FILES
     odometry/OdometryLOAM.cpp
     odometry/OdometryMSCKF.cpp
     odometry/OdometryVINS.cpp
-    
+
     IMUThread.cpp
     IMUFilter.cpp
     imufilter/ComplementaryFilter.cpp
-    
+
     Stereo.cpp
     StereoDense.cpp
     StereoCameraModel.cpp
     stereo/StereoBM.cpp
     stereo/StereoSGBM.cpp
-    
+
     OccupancyGrid.cpp
-    
+
     MarkerDetector.cpp
-    
+
     GainCompensator.cpp
 
     rtflann/ext/lz4.c
     rtflann/ext/lz4hc.c
     FlannIndex.cpp
-    
+
     #clams stuff
     clams/discrete_depth_distortion_model_helpers.cpp
     clams/discrete_depth_distortion_model.cpp
     clams/frame_projector.cpp
     clams/slam_calibrator.cpp
-    
+
     opencv/ORBextractor.cc
 )
 
@@ -148,9 +148,9 @@ SET(INCLUDE_DIRS
 )
 
 SET(LIBRARIES
-	${OpenCV_LIBS} 
-	${PCL_LIBRARIES} 
-	${ZLIB_LIBRARIES} 
+	${OpenCV_LIBS}
+	${PCL_LIBRARIES}
+	${ZLIB_LIBRARIES}
 )
 
 IF(Sqlite3_FOUND)
@@ -233,7 +233,7 @@ IF(k4a_FOUND)
 	ELSE()
 		SET(LIBRARIES
 			${LIBRARIES}
-			k4a::k4a 
+			k4a::k4a
 			k4a::k4arecord
 		)
 	ENDIF()
@@ -263,7 +263,7 @@ IF(realsense2_FOUND)
 	ELSE()
 		SET(LIBRARIES
 			${LIBRARIES}
-			realsense2::realsense2 # target
+			realsense2 # target
 		)
 	ENDIF()
 ENDIF(realsense2_FOUND)
@@ -296,15 +296,15 @@ IF(WITH_TORO)
 		optimizer/toro3d/posegraph3.cpp
 		optimizer/toro3d/treeoptimizer3_iteration.cpp
 		optimizer/toro3d/treeoptimizer3.cpp
-	
+
 		optimizer/toro3d/posegraph2.cpp
 		optimizer/toro3d/treeoptimizer2.cpp
 	)
 ENDIF(WITH_TORO)
 
 IF(G2O_FOUND)
-	SET(INCLUDE_DIRS 
-		${INCLUDE_DIRS} 
+	SET(INCLUDE_DIRS
+		${INCLUDE_DIRS}
 		${G2O_INCLUDE_DIRS}
 	)
 	SET(LIBRARIES
@@ -328,8 +328,8 @@ IF(G2O_FOUND)
 ENDIF(G2O_FOUND)
 
 IF(cvsba_FOUND)
-	SET(INCLUDE_DIRS 
-		${INCLUDE_DIRS} 
+	SET(INCLUDE_DIRS
+		${INCLUDE_DIRS}
 		${cvsba_INCLUDE_DIRS}
 	)
 	SET(LIBRARIES
@@ -339,8 +339,8 @@ IF(cvsba_FOUND)
 ENDIF(cvsba_FOUND)
 
 IF(CERES_FOUND)
-	SET(INCLUDE_DIRS 
-		${INCLUDE_DIRS} 
+	SET(INCLUDE_DIRS
+		${INCLUDE_DIRS}
 		${CERES_INCLUDE_DIRS}
 	)
 	SET(LIBRARIES
@@ -350,8 +350,8 @@ IF(CERES_FOUND)
 ENDIF(CERES_FOUND)
 
 IF(libpointmatcher_FOUND)
-	SET(INCLUDE_DIRS 
-		${INCLUDE_DIRS} 
+	SET(INCLUDE_DIRS
+		${INCLUDE_DIRS}
 		${libpointmatcher_INCLUDE_DIRS}
 	)
 	SET(LIBRARIES
@@ -361,8 +361,8 @@ IF(libpointmatcher_FOUND)
 ENDIF(libpointmatcher_FOUND)
 
 IF(FastCV_FOUND)
-	SET(INCLUDE_DIRS 
-		${INCLUDE_DIRS} 
+	SET(INCLUDE_DIRS
+		${INCLUDE_DIRS}
 		${FastCV_INCLUDE_DIRS}
 	)
 	SET(LIBRARIES
@@ -372,8 +372,8 @@ IF(FastCV_FOUND)
 ENDIF(FastCV_FOUND)
 
 IF(loam_velodyne_FOUND)
-	SET(INCLUDE_DIRS 
-		${INCLUDE_DIRS} 
+	SET(INCLUDE_DIRS
+		${INCLUDE_DIRS}
 		${loam_velodyne_INCLUDE_DIRS}
 	)
 	SET(LIBRARIES
@@ -504,13 +504,13 @@ ENDIF(ORB_SLAM2_FOUND)
 IF(GTSAM_FOUND)
 	# Make sure GTSAM is built with system Eigen, not the included one in its package
 	IF(GTSAM_INCLUDE_DIR)
-		SET(INCLUDE_DIRS 
-			${INCLUDE_DIRS} 
-			${GTSAM_INCLUDE_DIR} 
+		SET(INCLUDE_DIRS
+			${INCLUDE_DIRS}
+			${GTSAM_INCLUDE_DIR}
 		)
 	ELSE()
-		SET(INCLUDE_DIRS 
-			${INCLUDE_DIRS} 
+		SET(INCLUDE_DIRS
+			${INCLUDE_DIRS}
 			${GTSAM_INCLUDE_DIRS}
 		)
 	ENDIF()
@@ -520,7 +520,7 @@ IF(GTSAM_FOUND)
 	)
 	IF(WIN32)
 		# GTSAM should be built in STATIC on Windows to avoid "error C2338: THIS_METHOD_IS_ONLY_FOR_1x1_EXPRESSIONS" when building GTSAM
-		add_definitions("-DGTSAM_IMPORT_STATIC") 
+		add_definitions("-DGTSAM_IMPORT_STATIC")
 	ENDIF(WIN32)
 	SET(LIBRARIES
 		${LIBRARIES}
@@ -549,8 +549,8 @@ foreach(arg ${R})
    set(RESOURCES "${RESOURCES}" "${arg}")
 endforeach(arg ${R})
 
-SET(RESOURCES_HEADERS 
-	${CMAKE_CURRENT_BINARY_DIR}/DatabaseSchema_sql.h 
+SET(RESOURCES_HEADERS
+	${CMAKE_CURRENT_BINARY_DIR}/DatabaseSchema_sql.h
 )
 
 IF(ANDROID)
@@ -603,10 +603,10 @@ INSTALL(TARGETS rtabmap_core
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT runtime
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT devel
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT devel)
-		
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../include/ 
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../include/
 		DESTINATION "${INSTALL_INCLUDE_DIR}"
-		COMPONENT devel 
-		FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp" 
+		COMPONENT devel
+		FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
 		PATTERN ".svn" EXCLUDE)
 

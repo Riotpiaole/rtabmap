@@ -244,6 +244,7 @@ public:
 			int oldId,
 			const std::map<int, Transform> & poses,
 			RegistrationInfo * info = 0);
+	OccupancyGrid* exportOccupancyGrid() const { return _occupancy; }
 
 private:
 	void preUpdate();

@@ -145,7 +145,9 @@ public:
 	 * Format (6 values): x y z roll pitch yaw
 	 * Format (7 values): x y z qx qy qz qw
 	 * Format (9 values, 3x3 rotation): r11 r12 r13 r21 r22 r23 r31 r32 r33
-	 * Format (12 values, 3x4 transform): r11 r12 r13 tx r21 r22 r23 ty r31 r32 r33 tz
+	 * Format (12 values, 3x4 transform): r11 r12 r13 tx
+	 * 									  r21 r22 r23 ty
+	 * 									  r31 r32 r33 tz
 	 */
 	static Transform fromString(const std::string & string);
 	static bool canParseString(const std::string & string);

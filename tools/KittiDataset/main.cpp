@@ -223,8 +223,8 @@ int main(int argc, char * argv[])
 	}
 	std::string pathLeftImages  = path+(color?"/image_2":"/image_0");
 	std::string pathRightImages = path+(color?"/image_3":"/image_1");
-	std::string pathCalib = path+"/calib.txt";
-	std::string pathTimes = path+"/times.txt";
+	std::string pathCalib = path+"calib.txt";
+	std::string pathTimes = path+"times.txt";
 	std::string pathScan;
 
 	printf("Paths:\n"
@@ -353,7 +353,10 @@ int main(int argc, char * argv[])
 	}
 
 	// We use CameraThread only to use postUpdate() method
-	Transform opticalRotation(0,0,1,0, -1,0,0,color?-0.06:0, 0,-1,0,height?1.67:0.0);
+	Transform opticalRotation(
+		  0,  0,   1,   0,
+	      -1, 0,   0,  color?-0.06:0,
+		  0,  -1,  0,  height?1.67:0.0);
 	CameraThread cameraThread(new
 		CameraStereoImages(
 				pathLeftImages,

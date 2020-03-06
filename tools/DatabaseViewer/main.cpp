@@ -32,7 +32,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 int main(int argc, char * argv[])
 {
 	ULogger::setType(ULogger::kTypeConsole);
-	ULogger::setLevel(ULogger::kInfo);
+	ULogger::setLevel(ULogger::kDebug);
 
 	QApplication * app = new QApplication(argc, argv);
 	rtabmap::DatabaseViewer * mainWindow = new rtabmap::DatabaseViewer();

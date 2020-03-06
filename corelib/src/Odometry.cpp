@@ -355,7 +355,7 @@ Transform Odometry::process(SensorData & data, const Transform & guessIn, Odomet
 
 	// KITTI datasets start with stamp=0
 	double dt = previousStamp_>0.0f || (previousStamp_==0.0f && framesProcessed()==1)?data.stamp() - previousStamp_:0.0;
-	Transform guess = dt>0.0 && guessFromMotion_ && !velocityGuess_.isNull()?Transform::getIdentity():Transform();
+	Transform guess = dt>0.0 && guessFromMotion_ && !velocityGuess_.isNull() ? Transform::getIdentity():Transform();
 	if(!(dt>0.0 || (dt == 0.0 && velocityGuess_.isNull())))
 	{
 		if(guessFromMotion_ && (!data.imageRaw().empty() || !data.laserScanRaw().isEmpty()))
