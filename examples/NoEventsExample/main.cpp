@@ -1,7 +1,6 @@
 /*
 Copyright (c) 2010-2016, Mathieu Labbe - IntRoLab - Universite de Sherbrooke
 All rights reserved.
-
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
     * Redistributions of source code must retain the above copyright
@@ -12,7 +11,6 @@ modification, are permitted provided that the following conditions are met:
     * Neither the name of the Universite de Sherbrooke nor the
       names of its contributors may be used to endorse or promote products
       derived from this software without specific prior written permission.
-
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -33,32 +31,31 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <rtabmap/core/Odometry.h>
 #include <QApplication>
 #include <stdio.h>
-#include <rtabmap/core/Parameters.h>
 
 using namespace rtabmap;
 
 void showUsage()
 {
 	printf("\nUsage:\n"
-		   "rtabmap-noEventsExample camera_rate odom_update map_update calibration_dir calibration_name path_left_images path_right_images\n"
-		   "Description:\n"
-		   "    camera_rate          Rate (Hz) of the camera.\n"
-		   "    odom_update          Do odometry update each X camera frames.\n"
-		   "    map_update           Do map update each X odometry frames.\n"
-		   "\n"
-		   "Example:\n"
-		   "     (with images from \"https://github.com/introlab/rtabmap/wiki/Stereo-mapping#process-a-directory-of-stereo-images\") \n"
-		   "     $ rtabmap-noEventsExample 20 2 10 stereo_20Hz stereo_20Hz stereo_20Hz/left stereo_20Hz/right\n"
-		   "       Camera rate = 20 Hz\n"
-		   "       Odometry update rate = 10 Hz\n"
-		   "       Map update rate = 1 Hz\n");
+			"rtabmap-noEventsExample camera_rate odom_update map_update calibration_dir calibration_name path_left_images path_right_images\n"
+			"Description:\n"
+			"    camera_rate          Rate (Hz) of the camera.\n"
+			"    odom_update          Do odometry update each X camera frames.\n"
+			"    map_update           Do map update each X odometry frames.\n"
+			"\n"
+			"Example:\n"
+			"     (with images from \"https://github.com/introlab/rtabmap/wiki/Stereo-mapping#process-a-directory-of-stereo-images\") \n"
+			"     $ rtabmap-noEventsExample 20 2 10 stereo_20Hz stereo_20Hz stereo_20Hz/left stereo_20Hz/right\n"
+			"       Camera rate = 20 Hz\n"
+			"       Odometry update rate = 10 Hz\n"
+			"       Map update rate = 1 Hz\n");
 	exit(1);
 }
 
 int main(int argc, char * argv[])
 {
 	ULogger::setType(ULogger::kTypeConsole);
-	ULogger::setLevel(ULogger::kError);
+	ULogger::setLevel(ULogger::kWarning);
 
 	if(argc < 8)
 	{
@@ -101,14 +98,11 @@ int main(int argc, char * argv[])
 			false, // assume that images are already rectified
 			(float)cameraRate,
 			opticalRotation);
-
-	ParametersMap parameters;
-	parameters.insert(ParametersPair(Parameters::kRGBDCreateOccupancyGrid(), "true"));
 	Rtabmap rtabmap;
-
 	if(camera.init(calibrationDir, calibrationName))
 	{
 		Odometry * odom = Odometry::create();
+		
 		rtabmap.init();
 
 		QApplication app(argc, argv);
@@ -159,13 +153,11 @@ int main(int argc, char * argv[])
 			printf("Processed all frames\n");
 			app.exec();
 		}
-
 	}
 	else
 	{
 		UERROR("Camera init failed!");
 	}
-	rtabmap.close(true, calibrationDir + "grid_db.db");
-
+	// rtabmap.close(true, "grid.db");
 	return 0;
 }

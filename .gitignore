@@ -9,4 +9,6 @@ app/android/.project
 app/android/AndroidManifest.xml
 app/android/res/raw/
 dataset
-build
+./build
+stereo_20Hz
+.vscode
